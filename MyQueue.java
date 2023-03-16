@@ -1,44 +1,54 @@
-package stack;
+package stacks_queues;
 
 public class MyQueue 
 {
-	char[] queue;
+	public char[] queue;
 	int tail;
-	int MAX;
-	int head;
+	int HEAD;
 	
 	public MyQueue(int tamaño)
 	{
 		this.queue = new char[tamaño];
-		this.MAX = queue.length;
+		this.HEAD = 0;
 		this.tail = 0;
-		this.head = 0;
 	}
 	
 	public void insert(char data) 
 	{
-		if(tail == MAX) 
-		{
-			System.out.println("Queue is full"); 
-		}
+		if(tail == queue.length) 
+		System.out.println("Queue is full"); 
 		else 
 		{
-			queue[tail++] = data;/* inserts data*/ 
+			queue[tail] = data;
+			tail++;
 		} 
 	}
 	
-	public char delete() 
-	{ 
-		if(tail == 0)
+	public char delete()
+	{
+		if(HEAD == tail)
 		{
-			System.out.println("Queue is empty"); 
+			System.out.println("Queue is empty");
 			return '#';
 		}
-		else 
+		else
 		{
-			tail = tail - 1 ; /* decreases top */
-			return queue[head++]; /*retuns eliminated element*/
-		}
+			char elementoEliminado = queue[HEAD];
+			HEAD++;
+			return elementoEliminado;
+		} 
 	}
 	
+	public void imprimirQueue()
+	{
+		if(HEAD == tail)
+		System.out.println("Queue is empty");
+		else
+		{
+			for(int i = HEAD; i < tail; i++)
+			{
+				System.out.println(queue[i]);
+			}
+		}
+	}
 }
